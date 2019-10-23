@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 
 const NumberBtn = props => (
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 1
+    padding: 1,
   },
   numberBtn: {
     flex: 1,

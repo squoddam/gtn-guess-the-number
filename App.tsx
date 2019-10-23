@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -12,11 +11,10 @@ const nav = createStackNavigator(
   {
     StartScreen: { screen: StartScreen },
     GameScreen: { screen: GameScreen },
-    GameOverScreen: { screen: GameOverScreen }
+    GameOverScreen: { screen: GameOverScreen },
   },
   {
-    initialRouteName: 'GameOverScreen',
-    // initialRouteName: 'StartScreen',
+    initialRouteName: 'StartScreen',
     headerMode: 'none',
   }
 );
@@ -37,24 +35,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (
-      this.state.isFontLoaded && (
-        <Routes />
-      )
-    );
+    return this.state.isFontLoaded && <Routes />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontFamily: 'Raleway',
-    fontSize: 30,
-  },
-});

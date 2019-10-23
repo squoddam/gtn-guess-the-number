@@ -12,12 +12,6 @@ import Title from '../components/Title';
 import Button from '../components/Button';
 import NumberKeyboard from '../components/NumberKeyboard';
 
-// DEBUG
-
-const log = v => (console.log(v), v);
-
-//DEBUG
-
 const GREEN = 'rgba(0, 255, 0, 0.3)';
 const RED = 'rgba(255, 0, 0, 0.3)';
 
