@@ -28,7 +28,7 @@ export const messages = {
         'Eh',
       ],
       check: history =>
-        history.slice(-3, -1).every(entry => entry.guess === '69'),
+        history.slice(-3).every(entry => entry.guess === '69'),
     },
     {
       name: 'Madness',
@@ -46,7 +46,7 @@ export const messages = {
       ],
       check: history =>
         history
-          .slice(-3, -1)
+          .slice(-3)
           .every(entry => entry.guess === history.slice(-1)[0].guess),
     },
   ],
