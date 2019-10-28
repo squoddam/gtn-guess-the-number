@@ -10,7 +10,7 @@ const GameOverScreen = ({ navigation }) => {
       <View style={styles.attempts}>
         <Title>And it only took you</Title>
         <Title titleStyle={styles.score}>
-          {navigation.getParam('attempts', '16')}
+          {navigation.getParam('attempts', 'NAN')}
         </Title>
         <Title>attempts!</Title>
       </View>
@@ -20,7 +20,7 @@ const GameOverScreen = ({ navigation }) => {
           onPress={() => navigation.navigate('GameScreen')}
         />
         <Button
-          title="BACK"
+          title="TO MAIN SCREEN"
           onPress={() => navigation.navigate('StartScreen')}
         />
       </View>
@@ -46,8 +46,7 @@ const styles = StyleSheet.create({
   },
   btns: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     paddingBottom: 20,
   },
 });
