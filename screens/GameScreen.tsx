@@ -11,22 +11,28 @@ import Title from '../components/Title';
 import Button from '../components/Button';
 import NumberKeyboard from '../components/NumberKeyboard';
 
-import { HistoryEntry } from './../components/HistoryEntry';
+import { HistoryEntry } from '../components/HistoryEntry';
 
 import { randMinMax } from './utils';
 import { messages, getDefaultMessage } from '../messagesHelper';
+import { NavigationStackProp } from 'react-navigation-stack';
+import { IHistoryEntry, ISpecialMessages } from '../types';
 
-const GameScreen = ({ navigation }) => {
-  const listRef = useRef();
+interface IProps {
+  navigation: NavigationStackProp;
+}
 
-  const randomNumber = useRef(String(Math.floor(Math.random() * 100)));
+const GameScreen: React.FC<IProps> = ({ navigation }) => {
+  const listRef = useRef<FlatList<IHistoryEntry>>(null);
+
+  const randomNumber = useRef<String>(String(Math.floor(Math.random() * 100)));
   const [guess, setGuess] = useState('');
-  const [history, setHistory] = useState([]);
-  const [msgMode, setMsgMode] = useState('common');
+  const [history, setHistory] = useState<IHistoryEntry[]>([]);
+  const [msgMode, setMsgMode] = useState<string | null>('common');
 
-  useEffect(() => listRef.current.scrollToEnd(), [history]);
+  useEffect(() => listRef!.current!.scrollToEnd(), [history]);
 
-  const setNum = num => setGuess(state => `${state}${num}`);
+  const setNum = (num: string) => setGuess(state => `${state}${num}`);
 
   const handleReset = () => setGuess('');
   const handleTry = () => {
@@ -49,10 +55,12 @@ const GameScreen = ({ navigation }) => {
   };
 
   const getMessage = useCallback(() => {
-    let currentMsgMode = null;
+    let currentMsgMode: string | null = null;
 
     if (msgMode) {
-      const modeConf = messages.special.find(mode => mode.name === msgMode);
+      const modeConf = messages.special.find(
+        (mode: ISpecialMessages) => mode.name === msgMode
+      );
 
       if (modeConf && modeConf.check(history)) {
         currentMsgMode = msgMode;

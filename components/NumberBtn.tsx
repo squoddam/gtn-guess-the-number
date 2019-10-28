@@ -2,7 +2,13 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 
-export const NumberBtn = props => (
+interface IProps {
+  num: string;
+  onPress: (num: string) => () => void;
+  disabled: boolean;
+}
+
+export const NumberBtn: React.FC<IProps> = props => (
   <Button
     title={props.num}
     containerStyle={styles.number}

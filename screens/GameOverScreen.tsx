@@ -2,8 +2,13 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Title from '../components/Title';
 import Button from '../components/Button';
+import { NavigationStackProp } from 'react-navigation-stack';
 
-const GameOverScreen = ({ navigation }) => {
+interface IProps {
+  navigation: NavigationStackProp;
+}
+
+const GameOverScreen: React.FC<IProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Title titleStyle={styles.congratsTitle}>Congratulations!</Title>

@@ -1,10 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 
-const Title = props => {
+interface IProps {
+  containerStyle?: ViewStyle;
+  titleStyle?: TextStyle;
+}
+
+const Title: React.FC<IProps> = props => {
   return (
-    <View style={{ ...styles.container, ...props.containerStyle }}>
-      <Text style={{ ...styles.title, ...props.titleStyle }}>
+    <View style={StyleSheet.flatten([styles.container, props.containerStyle])}>
+      <Text style={StyleSheet.flatten([styles.title, props.titleStyle])}>
         {props.children}
       </Text>
     </View>
