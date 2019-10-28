@@ -3,6 +3,6 @@
 It is a small game. Tha goal is to guess the number with the least amount of attempts.
 
 ## Roadmap
-- [ ] Refactor
+- [x] Refactor
 - [ ] Migrate to TypeScript
 - [ ] Add Highscore table
