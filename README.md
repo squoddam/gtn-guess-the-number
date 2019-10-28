@@ -4,5 +4,5 @@ It is a small game. Tha goal is to guess the number with the least amount of att
 
 ## Roadmap
 - [x] Refactor
-- [ ] Migrate to TypeScript
+- [x] Migrate to TypeScript
 - [ ] Add Highscore table
