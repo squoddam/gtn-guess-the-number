@@ -2,8 +2,15 @@ import React, { useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { NumberBtn } from './NumberBtn';
 
-const NumberKeyboard = props => {
-  const handleSetNum = useMemo(() => num => () => props.setNum(num));
+interface IProps {
+  disabled: boolean;
+  setNum: (num: string) => void;
+}
+
+const NumberKeyboard: React.FC<IProps> = props => {
+  const handleSetNum = useMemo(() => (num: string) => () => props.setNum(num), [
+    props.setNum,
+  ]);
 
   return (
     <View style={styles.container}>

@@ -1,6 +1,7 @@
 import { randMinMax } from './screens/utils';
+import { IMessages, IHistoryEntry } from './types';
 
-export const messages = {
+export const messages: IMessages = {
   default: {
     common: ['Nope.', 'Try Again!', 'You know how it works, right?'],
     lower: [
@@ -27,8 +28,7 @@ export const messages = {
         'Are you old enough to play this game?',
         'Eh',
       ],
-      check: history =>
-        history.slice(-3).every(entry => entry.guess === '69'),
+      check: history => history.slice(-3).every(entry => entry.guess === '69'),
     },
     {
       name: 'Madness',
@@ -52,7 +52,7 @@ export const messages = {
   ],
 };
 
-export const getDefaultMessage = history => {
+export const getDefaultMessage = (history: IHistoryEntry[]): string => {
   const lastEntry = history.slice(-1)[0];
   const isCommon = randMinMax(0, 2) === 1;
 
