@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Link } from 'react-router-native';
+import PropTypes from 'prop-types';
+import { View, StyleSheet } from 'react-native';
 
 import Title from '../components/Title';
 import Button from '../components/Button';
@@ -13,6 +13,10 @@ const StartScreen = ({ navigation }) => (
     </View>
   </View>
 );
+
+StartScreen.propTypes = {
+  navigation: PropTypes.object,
+};
 
 const styles = StyleSheet.create({
   container: {

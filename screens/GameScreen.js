@@ -5,121 +5,16 @@ import React, {
   useRef,
   useCallback,
 } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { View, FlatList, StyleSheet } from 'react-native';
 
 import Title from '../components/Title';
 import Button from '../components/Button';
 import NumberKeyboard from '../components/NumberKeyboard';
 
-// DEBUG
+import { HistoryEntry } from './../components/HistoryEntry';
 
-const log = v => (console.log(v), v);
-
-//DEBUG
-
-const GREEN = 'rgba(0, 255, 0, 0.3)';
-const RED = 'rgba(255, 0, 0, 0.3)';
-
-const randMinMax = (min, max) => Math.floor(Math.random() * (max - min) + min);
-
-const HistoryEntry = ({ item }) => {
-  const iconName = `caret${item.isLower ? 'down' : 'up'}`;
-  const color = item.isLower ? RED : GREEN;
-  const suffix = item.isLower ? 'Lower' : 'Higher';
-
-  return (
-    <View
-      style={[
-        styles.historyEntryContainer,
-        styles[`historyEntryContainer${suffix}`],
-      ]}>
-      <Text
-        style={[styles.historyEntryText, styles[`historyEntryText${suffix}`]]}>
-        {item.guess} is {suffix}
-      </Text>
-      <Icon name={iconName} type="antdesign" color={color} size={18} />
-    </View>
-  );
-};
-
-const messages = {
-  default: {
-    common: ['Nope.', 'Try Again!', 'You know how it works, right?'],
-    lower: [
-      'Take Higher!',
-      'Add up!',
-      'A little (maybe) higher?',
-      'No, not that low!',
-    ],
-    higher: [
-      'Wow, go down!',
-      'No, no that high!',
-      'You try too high',
-      'Get closer to the ground!',
-    ],
-  },
-  special: [
-    {
-      name: '69',
-      messages: [
-        'Noice',
-        'Cool',
-        'Seriously?',
-        'Hm, ok',
-        'Are you old enough to play this game?',
-        'Eh',
-      ],
-      check: history =>
-        history.slice(-3, -1).every(entry => entry.guess === '69'),
-    },
-    {
-      name: 'Madness',
-      messages: [
-        'Hm',
-        "I've already seen this...",
-        'What...',
-        'Are you even playing?',
-        'You think this is funny?',
-        'Have you heard a definition of madness?',
-        'Yeah, cool, but what about other numbers?',
-        'Ha-ha',
-        'Funny (not really)',
-        '...',
-      ],
-      check: history =>
-        history
-          .slice(-3, -1)
-          .every(entry => entry.guess === history.slice(-1)[0].guess),
-    },
-  ],
-};
-
-const messagesActions = {
-  ['attempt']: (state, action) => {},
-};
-
-function messagesReducer(state, action) {}
-
-const initialState = {
-  history: [],
-  currentSequence: null,
-};
-
-const getDefaultMessage = history => {
-  const lastEntry = history.slice(-1)[0];
-  const isCommon = randMinMax(0, 2) === 1;
-
-  if (isCommon) {
-    return messages.default.common[
-      randMinMax(0, messages.default.common.length)
-    ];
-  }
-
-  const type = lastEntry.isLower ? 'lower' : 'higher';
-
-  return messages.default[type][randMinMax(0, messages.default[type].length)];
-};
+import { randMinMax } from './utils';
+import { messages, getDefaultMessage } from '../messagesHelper';
 
 const GameScreen = ({ navigation }) => {
   const listRef = useRef();
@@ -253,30 +148,6 @@ const styles = StyleSheet.create({
     flex: 0,
     height: 30 * 5,
     flexGrow: 0,
-  },
-  historyEntryContainer: {
-    height: 30,
-    width: '100%',
-    flex: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-  },
-  historyEntryContainerLower: {
-    backgroundColor: 'rgba(255, 0, 0, 0.05)',
-  },
-  historyEntryContainerHigher: {
-    backgroundColor: 'rgba(0, 255, 0, 0.05)',
-  },
-  historyEntryText: {
-    fontSize: 18,
-  },
-  historyEntryTextLower: {
-    color: 'rgba(255, 0, 0, 0.3)',
-  },
-  historyEntryTextHigher: {
-    color: 'rgba(0, 255, 0, 0.3)',
   },
   btnsContainer: {
     width: '100%',
